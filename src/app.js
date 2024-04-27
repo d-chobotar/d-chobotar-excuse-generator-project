@@ -2,21 +2,15 @@
 import "bootstrap";
 import "./style.css";
 
-var commandHistory = [];
+let commandHistory = [];
 let secretWord;
 
 window.onload = function() {
   let myModal = new bootstrap.Modal(document.getElementById("modal"));
   myModal.show();
   secretWord = highlightLetters();
-  const tooltipTriggerList = document.querySelectorAll(
-    '[data-bs-toggle="tooltip"]'
-  );
-  const tooltipList = [...tooltipTriggerList].map(
-    tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl)
-  );
-
   document.getElementById("username").textContent = generateUsername();
+  
   commandHistory = [
     {
       command: "commands: do -chuck | -learn | -help",
@@ -52,6 +46,7 @@ window.onload = function() {
       }
     });
 };
+
 
 function generateUsername() {
   const prefixes = ["mega", "ultra", "super", "hyper", "crypto"];
@@ -101,7 +96,7 @@ function updateHistoryUI(commandHistory) {
 }
 
 function highlightLetters() {
-  let text = `
+  const text = `
       In the vast wilderness of the IT world, where "Have you tried turning it
       off and on again?" is more of a mantra than a mere suggestion, one must
       tread carefully. Remember, a wise developer once said, "There are two ways
@@ -136,7 +131,7 @@ function highlightLetters() {
       an infinite loop. 
     `;
 
-  let words = [
+  const words = [
     "function",
     "variable",
     "database",
@@ -158,20 +153,12 @@ function highlightLetters() {
 
   for (let i = 0; i < word.length; i++) {
     offset = sectionCount * i;
-    console.log("offset: ", offset);
     let section = text.substring(offset, offset + sectionCount);
-    console.log("section: ", section);
-    console.log("Looking for letter: ", word[i]);
     position = section.toLowerCase().indexOf(word[i].toLowerCase());
-    console.log("position: ", position);
     if (position !== -1) {
-      console.log("Found: ", word[i]);
       newText += section.substring(0, position);
-      console.log("newText: ", newText);
       newText += '<span class="highlight">' + section[position] + "</span>";
-      console.log("newText: ", newText);
       newText += section.substring(position + 1);
-      console.log("newText: ", newText);
     }
   }
   document.getElementById("bg-text").innerHTML = newText;
@@ -287,9 +274,9 @@ function doLearn() {
     "Catch one and make a wish."
   ];
 
-  let scientificConcept = Math.floor(Math.random() * scientificConcepts.length);
-  let fantasticalTwist = Math.floor(Math.random() * fantasticalTwists.length);
-  let quirkyConsequence = Math.floor(Math.random() * quirkyConsequences.length);
+  const scientificConcept = Math.floor(Math.random() * scientificConcepts.length);
+  const fantasticalTwist = Math.floor(Math.random() * fantasticalTwists.length);
+  const quirkyConsequence = Math.floor(Math.random() * quirkyConsequences.length);
 
   return `${scientificConcepts[scientificConcept]} ${fantasticalTwists[fantasticalTwist]} ${quirkyConsequences[quirkyConsequence]}`;
 }
@@ -363,9 +350,9 @@ function doHelp() {
     "Heavy traffic expected in circuit pathways."
   ];
 
-  let setupRandom = setup[Math.floor(Math.random() * setup.length)];
-  let reasonRandom = reason[Math.floor(Math.random() * reason.length)];
-  let consequenceRandom =
+  const setupRandom = setup[Math.floor(Math.random() * setup.length)];
+  const reasonRandom = reason[Math.floor(Math.random() * reason.length)];
+  const consequenceRandom =
     consequence[Math.floor(Math.random() * consequence.length)];
   return `${setupRandom} ${reasonRandom} ${consequenceRandom}`;
 }
@@ -375,8 +362,8 @@ function doDefault() {
 }
 
 function doChuck() {
-  let subjects = ["Chuck Norris"];
-  let actions = [
+  const subjects = ["Chuck Norris"];
+  const actions = [
     "compiles",
     "debugs",
     "writes",
@@ -398,7 +385,7 @@ function doChuck() {
     "annotates",
     "reviews"
   ];
-  let objects = [
+  const objects = [
     "binary with his bare hands",
     "errors into warnings",
     "a blockchain",
@@ -420,7 +407,7 @@ function doChuck() {
     "the next big data platform",
     "a self-aware AI"
   ];
-  let circumstances = [
+  const circumstances = [
     "before breakfast",
     "with one line of code",
     "faster than you run your unit tests",
@@ -443,10 +430,10 @@ function doChuck() {
     "using morse code"
   ];
 
-  let who = subjects[Math.floor(Math.random() * subjects.length)];
-  let what = objects[Math.floor(Math.random() * objects.length)];
-  let when = circumstances[Math.floor(Math.random() * circumstances.length)];
-  let how = actions[Math.floor(Math.random() * actions.length)];
+  const who = subjects[Math.floor(Math.random() * subjects.length)];
+  const what = objects[Math.floor(Math.random() * objects.length)];
+  const when = circumstances[Math.floor(Math.random() * circumstances.length)];
+  const how = actions[Math.floor(Math.random() * actions.length)];
 
   return `${who} ${how} ${what} ${when}`;
 }
